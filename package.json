@@ -1,0 +1,44 @@
+{
+  "name": "multiplayer",
+  "version": "1.0.0",
+  "description": "Should be a HTML5 Canvas Multiplayer Game of some sort.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --watch",
+    "start": "webpack-dev-server --open",
+    "build": "webpack",
+    "build:prod": "webpack --config ./config/webpack.config.prod.js",
+    "build:dev": "webpack --config ./config/webpack.config.dev.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gsicvj/multiplayer.git"
+  },
+  "keywords": [
+    "multiplayer",
+    "html5",
+    "canvas",
+    "typescript",
+    "jest"
+  ],
+  "author": "Domen Urh (http://www.domenurh.com)",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/gsicvj/multiplayer/issues"
+  },
+  "homepage": "https://github.com/gsicvj/multiplayer#readme",
+  "devDependencies": {
+    "@types/node": "^13.11.0",
+    "@types/webpack": "^4.41.10",
+    "@types/webpack-dev-server": "^3.10.1",
+    "clean-webpack-plugin": "^3.0.0",
+    "html-webpack-plugin": "^4.0.4",
+    "ts-loader": "^6.2.2",
+    "ts-node": "^8.8.1",
+    "typescript": "^3.8.3",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  }
+}
