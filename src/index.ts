@@ -1,8 +1,19 @@
-const testComponent = () => {
-  const element = document.createElement('div');
-  element.innerHTML = ('Typescript + Webpack!');
+import io from 'socket.io-client';
+const socket = io('http://localhost:3000');
 
-  return element;
+var myMessage: string = null;
+socket.on('Users', (numberOfUsers: number) => {
+  const app = document.getElementById(appId);
+  app.innerHTML = `${numberOfUsers}`;
+});
+
+const renderApp = (containerId: string) => {
+  const app = document.createElement('div');
+  app.setAttribute('id', containerId);
+  app.innerHTML = `Typescript + Webpack! WITH ${myMessage}`;
+
+  document.body.appendChild(app);
 };
 
-document.body.appendChild(testComponent());
+const appId = 'multiplayer-app';
+renderApp(appId);
