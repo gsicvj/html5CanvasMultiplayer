@@ -1,17 +1,6 @@
 const path = require('path');
-const webpack = require('webpack');
-const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-
-var nodeModules = {};
-fs.readdirSync('node_modules')
-  .filter(function (x) {
-    return ['.bin'].indexOf(x) === -1;
-  })
-  .forEach(function (mod) {
-    nodeModules[mod] = 'commonjs ' + mod;
-  });
 
 module.exports = [
   {
@@ -53,7 +42,6 @@ module.exports = [
     output: {
       filename: 'server.[hash].js',
       path: path.resolve(__dirname, 'dist')
-    },
-    externals: nodeModules
+    }
   }
 ];
