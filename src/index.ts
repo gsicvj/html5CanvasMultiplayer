@@ -1,5 +1,13 @@
 import io from 'socket.io-client';
+import 
+{
+  start as GamePlayStart,
+  stop as GamePlayStop
+} 
+from './scenes/gameplay/gameplay';
+
 const socket = io('http://localhost:3000');
+const appId = 'multiplayer-app';
 
 var myMessage: string = null;
 socket.on('Users', (numberOfUsers: number) => {
@@ -12,8 +20,17 @@ const renderApp = (containerId: string) => {
   app.setAttribute('id', containerId);
   app.innerHTML = `Typescript + Webpack! WITH ${myMessage}`;
 
-  document.body.appendChild(app);
+  const startButton = document.createElement('button');
+  startButton.innerHTML = 'Start';
+  startButton.setAttribute('type', 'button');
+  startButton.addEventListener('click', () => GamePlayStart(appId));
+
+  const stopButton = document.createElement('button');
+  stopButton.innerHTML = 'Stop';
+  stopButton.setAttribute('type', 'button');
+  stopButton.addEventListener('click', () => GamePlayStop());
+
+  document.body.append(app, startButton, stopButton);
 };
 
-const appId = 'multiplayer-app';
 renderApp(appId);
