@@ -9,6 +9,12 @@ interface Dimensions {
 }
 
 interface GameBoardData {
+  // TODO: resolve Painter - is now class
   painter: Painter;
   offset: Coordinate;
+}
+
+interface ServerPlayer {
+  id: string,
+  position: Coordinate
 }

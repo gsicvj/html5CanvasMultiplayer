@@ -2,17 +2,16 @@ import Controller from '../controller/controller';
 import Painter from '../../utilities/painter/painter';
 
 class Player {
-  readonly FILL_COLOR = '#edd';
+  readonly FILL_COLOR = Painter.colorGenerator();
   readonly STROKE_COLOR = '#988';
   readonly SPEED = 1.25;
-  readonly MOVEMENT_MULTIPLIER = 4.5;
+  readonly MOVEMENT_MULTIPLIER = 0.125;
 
   position: Coordinate;
   offset: Coordinate;
   size: Dimensions;
   painter: Painter;
   controller: Controller;
-  name: 'jogn';
 
   movementDistance = 0;
 
@@ -31,13 +30,18 @@ class Player {
   }
 
   update (deltaTs: number, offset: Coordinate) {
+    // TODO: movementDistance {x, y}
     this.movementDistance =
         this.MOVEMENT_MULTIPLIER
       * this.SPEED
       * deltaTs;
 
+    // recalibrate (window resize)
     this.controller.offset = offset;
-    // TODO: move
+    // move
+    Object.values(this.controller.keys).forEach(({axis, directionFactor, state}: ControllerKeyState) => {
+      if (state) this.position[axis] += directionFactor * this.movementDistance;
+    });
   };
 
   draw () {

@@ -9,21 +9,14 @@ from './scenes/gameplay/gameplay';
 const socket = io('http://localhost:3000');
 const appId = 'multiplayer-app';
 
-var myMessage: string = null;
-socket.on('Users', (numberOfUsers: number) => {
-  const app = document.getElementById(appId);
-  app.innerHTML = `${numberOfUsers}`;
-});
-
 const renderApp = (containerId: string) => {
   const app = document.createElement('div');
   app.setAttribute('id', containerId);
-  app.innerHTML = `Typescript + Webpack! WITH ${myMessage}`;
 
   const startButton = document.createElement('button');
   startButton.innerHTML = 'Start';
   startButton.setAttribute('type', 'button');
-  startButton.addEventListener('click', () => GamePlayStart(appId));
+  startButton.addEventListener('click', () => GamePlayStart(appId, socket));
 
   const stopButton = document.createElement('button');
   stopButton.innerHTML = 'Stop';

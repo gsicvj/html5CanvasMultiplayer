@@ -5,7 +5,7 @@ interface ControllerKeyMap {
 interface ControllerKeyState {
   state: boolean;
   directionFactor: number;
-  axis: string;
+  axis: 'x' | 'y';
 }
 
 interface ControllerKeys {

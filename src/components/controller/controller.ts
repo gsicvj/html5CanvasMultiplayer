@@ -80,8 +80,7 @@ class Controller {
   handleKeyDownEvents ({keyCode}: KeyboardEvent) {
     const keyPressed = this.keyMap[keyCode];
 
-    if (this.keys[keyPressed])
-      this.keys[keyPressed].state = true;
+    if (this.keys[keyPressed]) this.keys[keyPressed].state = true;
   };
 
   handleKeyUpEvents ({keyCode}: KeyboardEvent) {

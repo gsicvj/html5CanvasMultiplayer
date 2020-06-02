@@ -4,6 +4,9 @@ class GameBoard {
 
   readonly GAME_BOARD_ID = 'jabba-the-hutt';
   readonly CLEAR_COLOR = '#fee';
+  readonly OTHER_PLAYERS_FILL_COLOR = '#555';
+  readonly OTHER_PLAYERS_STROKE_COLOR = '#000';
+  readonly OTHER_PLAYERS_SIZE = 50;
 
   board: HTMLCanvasElement = null;
   size: Dimensions = null;
@@ -15,6 +18,9 @@ class GameBoard {
   clearColor: string = null;
   lastRenderTs = 0;
   gameOn = false;
+
+  serverPlayers: ServerPlayer[] = null;
+  playerId: ServerPlayer['id'] = null;
 
   constructor (size: Dimensions) {
     this.size = size;
@@ -73,6 +79,11 @@ class GameBoard {
     this.positionSelf();
   };
 
+  update(playerId: string, serverPlayers: ServerPlayer[]) {
+    this.playerId = playerId;
+    this.serverPlayers = serverPlayers;
+  };
+
   draw () {
     this
       .painter
@@ -83,6 +94,22 @@ class GameBoard {
         this.size.height,
         this.CLEAR_COLOR
       );
+
+      if (!this.serverPlayers) return;
+      for (const player of this.serverPlayers) {
+        if (player.id !== this.playerId) {
+          this
+            .painter
+            .drawRect(
+              player.position.x,
+              player.position.y,
+              this.OTHER_PLAYERS_SIZE,
+              this.OTHER_PLAYERS_SIZE,
+              this.OTHER_PLAYERS_FILL_COLOR,
+              this.OTHER_PLAYERS_STROKE_COLOR
+            );
+        }
+      }
   }
 }
 
