@@ -1,12 +1,4 @@
-import Player from '../player/player';
-
 class Controller {
-  readonly KEY_UP = 38;
-  readonly KEY_RIGHT = 39;
-  readonly KEY_DOWN = 40;
-  readonly KEY_LEFT = 37;
-  readonly KEY_ESCAPE = 27;
-  readonly KEY_SPACE = 32;
   readonly keyMap: ControllerKeyMap = {
     38: 'up',
     39: 'right',
