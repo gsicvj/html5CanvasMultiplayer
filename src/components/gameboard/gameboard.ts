@@ -15,10 +15,6 @@ class GameBoard {
     context: CanvasRenderingContext2D = null;
     painter: Painter = null;
 
-    clearColor: string = null;
-    lastRenderTs = 0;
-    gameOn = false;
-
     serverPlayers: ServerPlayer[] = null;
     playerId: ServerPlayer['id'] = null;
 

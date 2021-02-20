@@ -1,89 +1,90 @@
 class Controller {
-  readonly keyMap: ControllerKeyMap = {
-    38: 'up',
-    39: 'right',
-    40: 'down',
-    37: 'left',
-    27: 'escape',
-    32: 'space'
-  }
-
-  keys: ControllerKeys = {
-    up: {
-      state: false,
-      directionFactor: -1,
-      axis: 'y'
-    },
-    right: {
-      state: false,
-      directionFactor: 1,
-      axis: 'x'
-    },
-    down: {
-      state: false,
-      directionFactor: 1,
-      axis: 'y'
-    },
-    left: {
-      state: false,
-      directionFactor: -1,
-      axis: 'x'
+    readonly keyMap: ControllerKeyMap = {
+        38: 'up',
+        39: 'right',
+        40: 'down',
+        37: 'left',
+        27: 'escape',
+        32: 'space'
     }
-  }
 
-  position: Coordinate;
-  offset: Coordinate;
-  size: Dimensions;
-  constructor (position: Coordinate, offset: Coordinate, size: Dimensions) {
-    this.position = position;
-    this.offset = offset;
-    this.size = size;
+    keys: ControllerKeys = {
+        up: {
+            state: false,
+            directionFactor: -1,
+            axis: 'y'
+        },
+        right: {
+            state: false,
+            directionFactor: 1,
+            axis: 'x'
+        },
+        down: {
+            state: false,
+            directionFactor: 1,
+            axis: 'y'
+        },
+        left: {
+            state: false,
+            directionFactor: -1,
+            axis: 'x'
+        }
+    }
 
-    // add event listeners
-    document
-      .addEventListener(
-        'mouseup',
-        this.handleClickEvents.bind(this)
-      );
+    position: Coordinate;
+    offset: Coordinate;
+    size: Dimensions;
 
-    document
-      .addEventListener(
-        'keydown',
-        this.handleKeyDownEvents.bind(this)
-      );
+    constructor(position: Coordinate, offset: Coordinate, size: Dimensions) {
+        this.position = position;
+        this.offset = offset;
+        this.size = size;
 
-    document
-      .addEventListener(
-        'keyup',
-        this.handleKeyUpEvents.bind(this)
-      );
-  }
+        // add event listeners
+        document
+            .addEventListener(
+                'mouseup',
+                this.handleClickEvents.bind(this)
+            );
 
-  handleClickEvents ({clientX, clientY}: MouseEvent) {
-    this.position.x = clientX
-      - this.offset.x
-      - this.size.width * 0.5;
+        document
+            .addEventListener(
+                'keydown',
+                this.handleKeyDownEvents.bind(this)
+            );
 
-    this.position.y = clientY
-      - this.offset.y
-      - this.size.height * 0.5;
-  };
+        document
+            .addEventListener(
+                'keyup',
+                this.handleKeyUpEvents.bind(this)
+            );
+    }
 
-  handleKeyDownEvents ({keyCode}: KeyboardEvent) {
-    const keyPressed = this.keyMap[keyCode];
+    handleClickEvents({clientX, clientY}: MouseEvent) {
+        this.position.x = clientX
+            - this.offset.x
+            - this.size.width * 0.5;
 
-    if (this.keys[keyPressed]) this.keys[keyPressed].state = true;
-  };
+        this.position.y = clientY
+            - this.offset.y
+            - this.size.height * 0.5;
+    };
 
-  handleKeyUpEvents ({keyCode}: KeyboardEvent) {
-    const keyPressed = this.keyMap[keyCode];
+    handleKeyDownEvents({keyCode}: KeyboardEvent) {
+        const keyPressed = this.keyMap[keyCode];
 
-    Object.keys(this.keys).forEach(key => {
-      if (key !== keyPressed) this.keys[key].state = false;
-    });
-  };
+        if (this.keys[keyPressed]) this.keys[keyPressed].state = true;
+    };
+
+    handleKeyUpEvents({keyCode}: KeyboardEvent) {
+        const keyPressed = this.keyMap[keyCode];
+
+        Object.keys(this.keys).forEach(key => {
+            if (key !== keyPressed) this.keys[key].state = false;
+        });
+    };
 }
 
 export {
-  Controller as default
+    Controller as default
 }
